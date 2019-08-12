@@ -78,37 +78,37 @@ $user_name = 'Ihor'; // укажите здесь ваше имя
             'title' => '2014 Rossignol District Snowboard',
             'category' => 'Доски и лыжи',
             'price' => '10999',
-            'URL img' => 'img/lot-1.jpg',
+            'URL-img' => 'img/lot-1.jpg',
             ],
             [
             'title' => 'DC Ply Mens 2016/2017 Snowboard',
             'category' => 'Доски и лыжи',
             'price' => '159999',
-            'URL img' => 'img/lot-2.jpg',
+            'URL-img' => 'img/lot-2.jpg',
              ],
              [
             'title' => 'Крепления Union Contact Pro 2015 года размер L/XL',
             'category' => 'Крепления',
             'price' => '8000',
-            'URL img' => 'img/lot-3.jpg',
+            'URL-img' => 'img/lot-3.jpg',
             ],
             [
             'title' => 'Ботинки для сноуборда DC Mutiny Charocal',
             'category' => 'Ботинки',
             'price' => '10999',
-            'URL img' => 'img/lot-4.jpg',
+            'URL-img' => 'img/lot-4.jpg',
             ],
             [
             'title' => 'Куртка для сноуборда DC Mutiny Charocal',
             'category' => 'Одежда',
             'price' => '7500',
-            'URL img' => 'img/lot-5.jpg',
+            'URL-img' => 'img/lot-5.jpg',
             ],
             [
             'title' => 'Маска Oakley Canopy',
             'category' => 'Разное',
             'price' => '5400',
-            'URL img' => 'img/lot-6.jpg',
+            'URL-img' => 'img/lot-6.jpg',
             ],
         ];
             ?>
@@ -116,7 +116,7 @@ $user_name = 'Ihor'; // укажите здесь ваше имя
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="" width="350" height="260" alt="">
-                    <img src="<?= $item['URL img']; ?>" width="350" height="260" alt="<?= $item['title']; ?>">
+                    <img src="<?= $item['URL-img']; ?>" width="350" height="260" alt="<?= $item['title']; ?>">
                 </div>
                 <div class="lot__info">
                     <span class="lot__category"><?= $item['category']; ?></span>
