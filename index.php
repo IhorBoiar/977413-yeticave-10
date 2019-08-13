@@ -113,12 +113,15 @@ $user_name = 'Ihor'; // укажите здесь ваше имя
         ];
             ?>
             <?php 
-            function format_price($a) {
-                if ($a > 1000) {
-                    $format = number_format($a, 0, ',', ' ');
-                    return $format . "<b class='rub'>p</b>";
+            function formatPrice($price) {
+                ceil($price);
+                if ($price >= 1000) {
+                    $price = number_format($price, 0, ',', ' ');
                 }
-                return $a;
+
+                $price = $price . "<b class='rub'>p</b>";
+                
+                return $price;
             }
             ?>
             <?php foreach ($items as $item) : ?>
@@ -133,7 +136,7 @@ $user_name = 'Ihor'; // укажите здесь ваше имя
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?= format_price($item['price']); ?></span>
+                            <span class="lot__cost"><?= formatPrice($item['price']); ?></span>
                         </div>
                         <div class="lot__timer timer">
                             12:23
