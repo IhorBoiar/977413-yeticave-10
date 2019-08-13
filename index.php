@@ -117,9 +117,8 @@ $user_name = 'Ihor'; // укажите здесь ваше имя
                 if ($a > 1000) {
                     $format = number_format($a, 0, ',', ' ');
                     return $format . "<b class='rub'>p</b>";
-                } else {
-                    return $a . "<b class='rub'>p</b>";
                 }
+                return $a;
             }
             ?>
             <?php foreach ($items as $item) : ?>
