@@ -56,6 +56,9 @@ $user_name = 'Ihor'; // укажите здесь ваше имя
     <nav class="nav">
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
+            <?php
+                $categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
+            ?>
             <?php foreach($categories as $item) : ?>
             <li class="nav__item">
                 <a href="pages/#"><?= $item ?></a>
