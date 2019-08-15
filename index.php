@@ -1,5 +1,7 @@
 <?php
 require_once("helpers.php");
+require_once("functions.php");
+require_once("data.php");
 
 
 $main_page = include_template("main.php", ['items' => $items, 'categories' => $categories]);
