@@ -30,9 +30,11 @@
                             <span class="lot__amount">Стартовая цена</span>
                             <span class="lot__cost"><?= formatPrice($item['price']); ?></span>
                         </div>
-                        <div class="lot__timer timer">
+                        <div class="lot__timer timer <?php if ($hour < 1) { echo "timer-fishing"; } ?>">
                         <?php $arr = get_dt_range($item['last_date']);
-                            echo $arr[0] . ':' . $arr[1]; ?>
+                            $hour = $arr[0];
+                            $min = $arr[1];
+                            echo $hour . ':' . $min; ?>
                         </div>
                     </div>
                 </div>
