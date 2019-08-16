@@ -4,7 +4,12 @@ require_once("functions.php");
 require_once("data.php");
 
 
-$main_page = include_template("main.php", ['items' => $items, 'categories' => $categories]);
+$main_page = include_template("main.php", [
+    'items' => $items,
+    'categories' => $categories,
+    'last_date' => $last_date,
+ ]);
+
 $layout_page = include_template("layout.php", [
     'content' => $main_page,
      'user_name' => $user_name,

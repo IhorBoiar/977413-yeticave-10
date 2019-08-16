@@ -31,7 +31,8 @@
                             <span class="lot__cost"><?= formatPrice($item['price']); ?></span>
                         </div>
                         <div class="lot__timer timer">
-                            12:23
+                        <?php $arr = get_dt_range($item['last_date']);
+                            echo $arr[0] . ':' . $arr[1]; ?>
                         </div>
                     </div>
                 </div>
