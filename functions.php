@@ -20,6 +20,9 @@
         $a = floor($diff_time / 3600);
         $b = floor($diff_time % 3600 / 60);
 
-        $array = [$a, $b];
+        $hours = str_pad($a, 2, "0", STR_PAD_LEFT);
+        $mins = str_pad($b, 2, "0", STR_PAD_LEFT);
+
+        $array = [$hours, $mins];
         return $array;
     }

@@ -20,7 +20,7 @@
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="" width="350" height="260" alt="">
-                    <img src="<?= $item['url_img']; ?>" width="350" height="260" alt="<?= htmlspecialchars($item['title']); ?>">
+                    <img src="<?= $item['url_img']; ?>" width="350" height="260" alt="<?= $item['title']; ?>">
                 </div>
                 <div class="lot__info">
                     <span class="lot__category"><?= $item['category']; ?></span>
@@ -30,11 +30,13 @@
                             <span class="lot__amount">Стартовая цена</span>
                             <span class="lot__cost"><?= formatPrice($item['price']); ?></span>
                         </div>
-                        <div class="lot__timer timer <?php if ($hour < 1) { echo "timer-fishing"; } ?>">
-                        <?php $arr = get_dt_range($item['last_date']);
-                            $hour = $arr[0];
-                            $min = $arr[1];
-                            echo $hour . ':' . $min; ?>
+                        <?php   
+                        $arr = get_dt_range($item['last_date']); 
+                        $hour = $arr[0];
+                        $min = $arr[1];
+                        ?>
+                        <div class="lot__timer timer <?php if ($hour < 1) { echo "timer--finishing"; } ?>">
+                        <?php echo $hour . ':' . $min; ?>
                         </div>
                     </div>
                 </div>

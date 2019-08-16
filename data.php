@@ -16,14 +16,14 @@
         'category' => 'Доски и лыжи',
         'price' => '15999',
         'url_img' => 'img/lot-2.jpg',
-        'last_date' => '2019-10-15',
+        'last_date' => '2019-10-16',
         ],
         [
         'title' => 'Крепления Union Contact Pro 2015 года размер L/XL',
         'category' => 'Крепления',
         'price' => '8000',
         'url_img' => 'img/lot-3.jpg',
-        'last_date' => '2019-10-11',
+        'last_date' => '2019-10-10 15:25',
         ],
         [
         'title' => 'Ботинки для сноуборда DC Mutiny Charocal',
