@@ -24,14 +24,19 @@
                 </div>
                 <div class="lot__info">
                     <span class="lot__category"><?= $item['category']; ?></span>
-                    <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?= $item['title']; ?></a></h3>
+                    <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?= htmlspecialchars($item['title']); ?></a></h3>
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
                             <span class="lot__cost"><?= formatPrice($item['price']); ?></span>
                         </div>
-                        <div class="lot__timer timer">
-                            12:23
+                        <?php   
+                        $arr = get_dt_range($item['last_date']); 
+                        $hour = $arr[0];
+                        $min = $arr[1];
+                        ?>
+                        <div class="lot__timer timer <?php if ($hour < 1) { echo "timer--finishing"; } ?>">
+                        <?php echo $hour . ':' . $min; ?>
                         </div>
                     </div>
                 </div>
