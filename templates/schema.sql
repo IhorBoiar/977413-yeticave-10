@@ -20,14 +20,16 @@ CREATE TABLE lots (
     name CHAR(128),
     description TEXT,
     price INT,
+    img CHAR(128),
     category_id INT,
-    time_exit DATE
+    time_exit DATE,
+    dt_add DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE bets (
     id INT AUTO_INCREMENT PRIMARY KEY,
     price INT,
-    user_id DATE,
+    user_id INT,
     lot_id INT,
     date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
