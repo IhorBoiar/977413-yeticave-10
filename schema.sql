@@ -29,8 +29,8 @@ CREATE TABLE lots (
     time_exit DATE,
     user_id INT,
     dt_add DATETIME DEFAULT CURRENT_TIMESTAMP,
-    winner CHAR(128),
-    round of bet INT,
+    winner INT,
+    round_of_bet INT,
 );
 
 CREATE TABLE bets (
