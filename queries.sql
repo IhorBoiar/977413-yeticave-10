@@ -1,13 +1,13 @@
 INSERT INTO categories (name, sim_code) VALUES
     ('Доски и лыжи', 'boards'),
-    ('Крепления' 'fastening'),
-    ('Ботинки' 'boots'),
-    ('Одежда' 'clothes'),
-    ('Инструменты' 'instruments'),
-    ('Разное' 'other');
+    ('Крепления', 'fastening'),
+    ('Ботинки', 'boots'),
+    ('Одежда', 'clothes'),
+    ('Инструменты', 'instruments'),
+    ('Разное', 'other');
 // Существующий список категорий;
 
-INSERT INTO users (name, email, password) VALUES
+INSERT INTO users (name, email, password, contacts) VALUES
     ('ihor', 'e@i.ua', 'secret', 'Russia, St.P'),
     ('vasya', 'b@i.ua', 'secret', 'Ukraine, Rovno'),
     ('sasha', 'a@i.ua', 'secret', 'Belarus, Minsk');
@@ -29,30 +29,30 @@ INSERT INTO bets (price, user_id, lot_id) VALUES
     (3000, 3, 4);
 // Добавьте пару ставок для любого объявления.
 
-SELECT l.id, name, description, price, img, category_id, time_exit, user_id FROM lots l
+SELECT l.id, l.name, description, price FROM lots l
 JOIN categories c
-ON c.category_id = l.id;
-//
+ON l.category_id = c.id;
+// связиваем лот с категорией
 
-SELECT l.id, name, description, price, img, category_id, time_exit, user_id FROM lots l
+SELECT l.id, l.name, description, price FROM lots l
 JOIN users u
-ON u.id = l.user_id;
+ON l.user_id = u.id;
+// связиваем лот с пользователем, который выставил обьявление
 
-
-SELECT b.price FROM bets b
+SELECT price FROM bets b
 JOIN users u
 ON b.user_id = u.id;
-// 
+// связиваем ставку с пользователем, который поставил ставку
 
 SELECT b.price FROM bets b
 JOIN lots l
 ON b.lot_id = l.id;
-//
+// связиваем ставку с лотом на который поставили ставку
 
 SELECT * FROM categories;
 // получить все категории;
 
-SELECT name, category_id FROM lots ORDER BY dd_add DESC;
+SELECT name, category_id FROM lots ORDER BY dt_add DESC;
 // получить самые новые, открытые лоты. Каждый лот должен включать название,
 стартовую цену, ссылку на изображение, цену, название категории;
 
