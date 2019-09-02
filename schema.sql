@@ -10,13 +10,13 @@ CREATE TABLE users (
     email CHAR(128) NOT NULL UNIQUE,
     password CHAR(128) NOT NULL,
     contacts CHAR(128),
-    dt_add DATETIME DEFAULT CURRENT_TIMESTAMP,
+    dt_add DATETIME DEFAULT CURRENT_TIMESTAMP
   );
 
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name CHAR(128)
-    sim_code CHAR(128) NOT NULL,
+    name CHAR(128),
+    sim_code CHAR(128) NOT NULL
 );
 
 CREATE TABLE lots (
@@ -30,7 +30,7 @@ CREATE TABLE lots (
     user_id INT,
     dt_add DATETIME DEFAULT CURRENT_TIMESTAMP,
     winner INT,
-    round_of_bet INT,
+    round_of_bet INT
 );
 
 CREATE TABLE bets (
@@ -38,7 +38,7 @@ CREATE TABLE bets (
     price INT,
     user_id INT,
     lot_id INT,
-    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE UNIQUE INDEX email_user ON users(email);
