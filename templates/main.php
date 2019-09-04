@@ -3,9 +3,9 @@
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
             <!--заполните этот список из массива категорий-->
-            <?php foreach($categories as $item) : ?>
+            <?php foreach($categories as $cat) : ?>
             <li class="promo__item promo__item--boards">
-                <a class="promo__link" href="#"><?= htmlspecialchars($item); ?></a>
+                <a class="promo__link" href="<?= $cat['sim_code']; ?>"><?= htmlspecialchars($cat['name']); ?></a>
             </li>
              <?php endforeach; ?>
         </ul>
@@ -20,18 +20,18 @@
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="" width="350" height="260" alt="">
-                    <img src="<?= $item['url_img']; ?>" width="350" height="260" alt="<?= htmlspecialchars($item['title']); ?>">
+                    <img src="<?= $item['img']; ?>" width="350" height="260" alt="<?= htmlspecialchars($item['name_l']); ?>">
                 </div>
                 <div class="lot__info">
-                    <span class="lot__category"><?= $item['category']; ?></span>
-                    <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?= htmlspecialchars($item['title']); ?></a></h3>
+                    <span class="lot__category"><?= $item['name_c']; ?></span>
+                    <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?= htmlspecialchars($item['name_l']); ?></a></h3>
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
                             <span class="lot__cost"><?= formatPrice($item['price']); ?></span>
                         </div>
                         <?php   
-                        $arr = get_dt_range($item['last_date']); 
+                        $arr = get_dt_range($item['time_exit']); 
                         $hour = $arr[0];
                         $min = $arr[1];
                         ?>

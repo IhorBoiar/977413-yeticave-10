@@ -51,9 +51,9 @@
     <nav class="nav">
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
-            <?php foreach($categories as $item) : ?>
+            <?php foreach($categories as $cat) : ?>
             <li class="nav__item">
-                <a href="pages/#"><?= $item ?></a>
+                <a href="pages/<?= $cat['sim_code'] ?>"><?= $cat['name'] ?></a>
             </li>
              <?php endforeach; ?>
         </ul>
