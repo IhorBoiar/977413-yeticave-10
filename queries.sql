@@ -52,9 +52,21 @@ ON b.lot_id = l.id;
 SELECT * FROM categories;
 // получить все категории;
 
-SELECT name, category_id FROM lots ORDER BY dt_add DESC;
-// получить самые новые, открытые лоты. Каждый лот должен включать название,
+SELECT l.name, price, img, c.name FROM lots l
+JOIN categories c ON c.id = l.category_id
+ORDER BY dt_add DESC;
+// получить самые новые лоты. Каждый лот должен включать название,
 стартовую цену, ссылку на изображение, цену, название категории;
+
+SELECT l.name, price, img, c.name FROM lots l
+JOIN categories c ON c.id = l.category_id
+WHERE time_exit > current_timestamp;
+// получить открытые лоты
+
+SELECT l.name, price, img, c.name FROM lots l
+JOIN categories c
+ON c.id = l.category_id;
+// получить названия категорий
 
 SELECT name, category_id FROM lots;
 // показать лот по его id. Получите также название категории, к которой принадлежит лот;
