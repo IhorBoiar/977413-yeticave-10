@@ -52,7 +52,7 @@ ON b.lot_id = l.id;
 SELECT * FROM categories;
 // получить все категории;
 
-SELECT l.name, price, img, c.name FROM lots l
+SELECT l.name AS name_lots, price, img, c.name AS name_cat FROM lots l
 JOIN categories c ON c.id = l.category_id
 ORDER BY dt_add DESC;
 // получить самые новые лоты. Каждый лот должен включать название,
