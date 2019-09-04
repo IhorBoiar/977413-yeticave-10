@@ -16,7 +16,7 @@ CREATE TABLE users (
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name CHAR(128),
-    sim_kod CHAR(128) NOT NULL
+    sim_code CHAR(128) NOT NULL
 );
 
 CREATE TABLE lots (
@@ -29,7 +29,7 @@ CREATE TABLE lots (
     time_exit DATE,
     user_id INT,
     dt_add DATETIME DEFAULT CURRENT_TIMESTAMP,
-    winner INT,
+    winner_id INT,
     round_of_bet INT
 );
 
