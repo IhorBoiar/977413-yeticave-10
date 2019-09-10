@@ -4,7 +4,7 @@
         <ul class="promo__list">
             <!--заполните этот список из массива категорий-->
             <?php foreach($categories as $cat) : ?>
-            <li class="promo__item promo__item--boards">
+            <li class="promo__item promo__item--<?= $cat['sim_code']; ?>">
                 <a class="promo__link" href="<?= $cat['sim_code']; ?>"><?= htmlspecialchars($cat['name']); ?></a>
             </li>
              <?php endforeach; ?>
