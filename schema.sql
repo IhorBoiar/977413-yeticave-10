@@ -1,8 +1,8 @@
-CREATE DATABASE yeticave
+CREATE DATABASE yeticave5
     DEFAULT CHARACTER SET utf8 
     DEFAULT COLLATE utf8_general_ci;    
 
-USE yeticave;
+USE yeticave5;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
