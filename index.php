@@ -14,7 +14,7 @@ if(!$con) {
 
 $sql_lots = "SELECT l.id AS id_lot, l.name AS name_l, price, img, c.name AS name_c, time_exit FROM lots l 
 JOIN categories c ON c.id = l.category_id
-ORDER BY dt_add DESC LIMIT 9";
+ORDER BY dt_add ASC LIMIT 9";
 $result_lots = mysqli_query($con, $sql_lots);
 $items = mysqli_fetch_all($result_lots, MYSQLI_ASSOC);
 
