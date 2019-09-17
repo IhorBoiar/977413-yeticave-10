@@ -26,7 +26,7 @@ CREATE TABLE lots (
     price INT,
     img CHAR(128),
     category_id INT,
-    time_exit DATE,
+    time_exit DATETIME,
     user_id INT,
     dt_add DATETIME DEFAULT CURRENT_TIMESTAMP,
     winner_id INT,
