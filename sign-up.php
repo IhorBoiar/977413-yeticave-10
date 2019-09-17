@@ -82,11 +82,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if(empty($errors)) {
                 $name = $_POST['name'];
                 $email = $_POST['email'];
+                
                 $password = $_POST['password'];
+                $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+
                 $contacts = $_POST['message'];
 
                 $sql_user_insert = "INSERT INTO `users` (`name`, `email`, `password`, `contacts`)
-                VALUES ('$name', '$email', '$password', '$contacts')";
+                VALUES ('$name', '$email', '$passwordHash', '$contacts')";
                 $res_us_ins = mysqli_query($con, $sql_user_insert);           
 
                 if ($res_us_ins) {
