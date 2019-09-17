@@ -1,4 +1,10 @@
-<?php 
+<?php
+$con = mysqli_connect("localhost", "root", "", "yeticave5");
+mysqli_set_charset($con, "utf8");
+
+if(!$con) {
+    echo "ERROR";
+} 
     function formatPrice($price) 
     {
         $price = ceil($price);
@@ -87,4 +93,14 @@
             return NULL;
    
         }
-
+    
+        function validateEmail($name, $con) {
+            $email = $_POST[$name];
+            $sql_email = "SELECT * FROM users WHERE email = " . $email;
+            $res_email = mysqli_query($con, $sql_email);
+                       
+            if($res_email) {
+                return $errors['email'] = "Такой email уже существует!";
+            }
+            return NULL;
+        }
