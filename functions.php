@@ -49,23 +49,6 @@
    
     }
 
-//  она не нужна тут походу
-    function validateImg($name) {
-        $img = './uploads/' . $_FILES[$name]['name'];    
-        $size = $_FILES[$name]['size'];
-
-        $type_img = mime_content_type($img);
-        echo $type_img;
-        if ($type_img != 'image/jpeg' && $type_img != 'image/jpg' && $type_img != 'image/png')
-        {
-             return "Неправильний формат! Должен быть - jpg, jpeg, png.";
-        } elseif ($size > 5000000) {
-                return "Максимальный размер - 5М.";
-            }
-   
-            return NULL;
-   
-        }
 
     function validateRate($name) {
         $lot_rate = $_POST[$name];

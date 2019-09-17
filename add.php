@@ -15,14 +15,6 @@ $sql_cat = "SELECT * FROM categories";
 $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
-print("Лот: " . $_POST['lot-name']);
-print("<br>Категория: " . $_POST['category']);
-print("<br>Описание: " . $_POST['message']);
-print("<br>Изображение: " . $_FILES['img']['name']);
-print("<br>Начальная цена: " . $_POST['lot-rate']);
-print("<br>Шаг ставки: " . $_POST['lot-step']);
-print("<br>Дата: " . $_POST['lot-date']);
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$lot = $_POST;
 
@@ -106,14 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 VALUES ('$lot_name', '$message', '$lot_rate', '$img', '$category', '$lot_date', 1, 2, '$lot_step')";
                 $result_ins = mysqli_query($con, $sql_insert);
                 
-                // $sql_id = "SELECT * FROM lots";
-                // $res_id = mysqli_query($con, $sql_id);
-                // $id = mysqli_fetch_all($res_id, MYSQLI_ASSOC);
-                // $new_lot = mysqli_insert_id($res_id);
+                $new_lot = mysqli_insert_id($con);
    
-            //     if ($res_id) {
-            //     header('Location: lot.php?id=' . $new_lot);
-            // }
+                if ($new_lot) {
+                header('Location: lot.php?id=' . $new_lot);
+            }
         }
 
     }
