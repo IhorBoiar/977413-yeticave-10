@@ -42,7 +42,9 @@ print($layout_page);
 } else {
     http_response_code(404);
     
-    $error = include_template("error.php");
+    $error = include_template("error.php", [
+        'error_message' => 'Такого лота не существует...',
+    ]);
     
     $error_page = include_template("layout.php", [
         'content' => $error,

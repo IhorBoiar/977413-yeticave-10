@@ -15,6 +15,26 @@ $sql_cat = "SELECT * FROM categories";
 $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
+if (!$_SESSION['email']) {
+    
+    http_response_code(403);
+    
+    $error = include_template("error.php", [
+        'error_message' => 'Чтобы добавить лот, нужно войти на сайт.',
+    ]);
+    
+    $error_page = include_template("layout.php", [
+        'content' => $error,
+        'user_name' => $user_name,
+        'is_auth' => $is_auth,
+        'categories' => $categories,
+        'title' => '403',
+        ]);
+    print($error_page);
+    } else {
+
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$lot = $_POST;
 
@@ -90,12 +110,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $lot_rate = $_POST['lot-rate'];
                 $lot_step = $_POST['lot-step'];
                 $lot_date = $_POST['lot-date'];
-
-
+                
+                $email = $_SESSION['email'];
+                $sql_user = mysqli_query($con, "SELECT * FROM `users` WHERE `email` = '$email'");
+                $id = mysqli_fetch_assoc($sql_user);
+                $id_user = $id['id'];
         
                 $sql_insert = "INSERT INTO `lots` (`name`, `description`, `price`, `img`, `category_id`,
                 `time_exit`, `user_id`, `winner_id`, `round_of_bet`)
-                VALUES ('$lot_name', '$message', '$lot_rate', '$img', '$category', '$lot_date', 1, 2, '$lot_step')";
+                VALUES ('$lot_name', '$message', '$lot_rate', '$img', '$category', '$lot_date', '$id_user', 2, '$lot_step')";
                 $result_ins = mysqli_query($con, $sql_insert);
                 
                 $new_lot = mysqli_insert_id($con);
@@ -122,3 +145,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ]);
 
 print($layout_page);
+ }

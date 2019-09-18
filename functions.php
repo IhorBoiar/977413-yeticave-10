@@ -1,4 +1,17 @@
 <?php
+session_start();
+
+$_SESSION['email'];
+$_SESSION['password'];
+$_SESSION['name']; 
+
+// print("ses email:" . $_SESSION['email']);
+// print("<br>ses passw:" . $_SESSION['password']);
+// print("<br>ses name:" . $_SESSION['name']);
+// print("<br>");
+
+// print("<br>sesion:" . var_dump($_SESSION));
+
 $con = mysqli_connect("localhost", "root", "", "yeticave5");
 mysqli_set_charset($con, "utf8");
 

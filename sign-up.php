@@ -14,6 +14,23 @@ $sql_cat = "SELECT * FROM categories";
 $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
+if ($_SESSION) {
+    http_response_code(403);
+    
+    $error = include_template("error.php", [
+        'error_message' => 'ты уже зарегестирован',
+    ]);
+    
+    $error_page = include_template("layout.php", [
+        'content' => $error,
+        'user_name' => $user_name,
+        'is_auth' => $is_auth,
+        'categories' => $categories,
+        'title' => 'ты уже зарегестирован',
+        ]);
+    print($error_page);
+    } else {
+
 
 // print("Email: " . $_POST['email']);
 // print("<br>Password: " . $_POST['password']);
@@ -94,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $res_us_ins = mysqli_query($con, $sql_user_insert);           
 
                 if ($res_us_ins) {
-                header('Location: sign-in.php');
+                header('Location: login.php');
             } 
         }
      else {
@@ -122,3 +139,4 @@ $layout_page = include_template("layout.php", [
     ]);
 
 print($layout_page);
+    }
