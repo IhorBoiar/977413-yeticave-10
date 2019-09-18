@@ -21,7 +21,6 @@ $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
 
-
 $main_page = include_template("main.php", [
     'items' => $items,
     'categories' => $categories,

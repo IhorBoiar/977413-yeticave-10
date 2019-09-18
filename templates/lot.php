@@ -39,10 +39,11 @@
                 Мин. ставка <span>12 000 р</span>
               </div>
             </div>
-    <?php endforeach; ?>
         </div>    
-    <!-- // потім забрати потрібно  -->
-            <!-- <form class="lot-item__form" action="https://echo.htmlacademy.ru" method="post" autocomplete="off">
+        <?php endforeach; ?>
+   
+        <?php if($_SESSION['email']):?>
+            <form class="lot-item__form" action="https://echo.htmlacademy.ru" method="post" autocomplete="off">
               <p class="lot-item__form-item form__item form__item--invalid">
                 <label for="cost">Ваша ставка</label>
                 <input id="cost" type="text" name="cost" placeholder="12 000">
@@ -104,9 +105,10 @@
                 <td class="history__price">10 999 р</td>
                 <td class="history__time">19.03.17 в 10:20</td>
               </tr>
-            </table> -->
+            </table>
+            <?php endif; ?>
           </div>
         </div>
       </div>
     </section>
-  </main>
+  
