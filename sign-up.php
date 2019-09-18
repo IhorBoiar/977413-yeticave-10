@@ -14,7 +14,7 @@ $sql_cat = "SELECT * FROM categories";
 $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
-if ($_SESSION) {
+if ($_SESSION['email']) {
     http_response_code(403);
     
     $error = include_template("error.php", [
