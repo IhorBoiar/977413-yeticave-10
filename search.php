@@ -24,7 +24,7 @@ if ($search) {
     $lots = mysqli_fetch_all($result, MYSQLI_ASSOC);  
     print(var_dump($result));
     // не работает
-    if (empty($result)) {    
+    if (mysqli_num_rows($result) == 0) { 
         $search_page = include_template("error.php", [
             'error_message' => "Ничего не найдено по вашему запросу...",
             'categories' => $categories,

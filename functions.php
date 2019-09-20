@@ -1,10 +1,13 @@
 <?php
 session_start();
 
-$_SESSION['email'];
-$_SESSION['password'];
-$_SESSION['name']; 
+// $_SESSION['email'];
+// $_SESSION['password'];
+// $_SESSION['name']; 
 
+// echo '<pre>';
+//   print_r( $_SESSION );
+// echo '</pre>';
 // print("ses email:" . $_SESSION['email']);
 // print("<br>ses passw:" . $_SESSION['password']);
 // print("<br>ses name:" . $_SESSION['name']);
@@ -29,6 +32,15 @@ if(!$con) {
         
         return $price;
     }
+
+    function formatPrice_2($price) 
+    {
+        $price = ceil($price);
+        if ($price >= 1000) {
+            $price = number_format($price, 0, ',', ' ');
+        }
+        return $price;
+    }
     
     function get_dt_range($format) 
     {
@@ -48,6 +60,10 @@ if(!$con) {
 
     function getPostVal($name) {
         return $_POST[$name] ?? "";
+    }
+
+    function getGetVal($name) {
+        return $_GET[$name] ?? "";
     }
 
     function validateFilled($name) {
