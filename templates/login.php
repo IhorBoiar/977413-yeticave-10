@@ -22,7 +22,7 @@
     <?php if (isset($errors['email'])) {
             echo "<span class='form__error'>" . $errors['email'] . "</span>";
            }
-           var_dump($errors['email']); 
+          //  var_dump($errors['email']); 
            ?>
      
     </div>
@@ -36,7 +36,7 @@
     <?php if (isset($errors['password'])) {
             echo "<span class='form__error'>" . $errors['password'] . "</span>";
            }
-           var_dump($errors['password']); 
+          //  var_dump($errors['password']); 
            ?>
 
       </div>

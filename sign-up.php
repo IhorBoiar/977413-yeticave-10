@@ -28,9 +28,8 @@ if ($_SESSION['email']) {
         'categories' => $categories,
         'title' => 'ты уже зарегестирован',
         ]);
-    print($error_page);
+    // print($error_page);
     } else {
-
 
 // print("Email: " . $_POST['email']);
 // print("<br>Password: " . $_POST['password']);
@@ -83,16 +82,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    
     $email = $_POST['email'];
     $email_valid = filter_var($email, FILTER_VALIDATE_EMAIL);
-    // $sql_email = "SELECT * FROM users WHERE email = " . $email;
-    // $res_email = mysqli_query($con, $sql_email);
+    $sql_email = "SELECT * FROM users WHERE email = '$email'";
+    $res_email = mysqli_query($con, $sql_email);
+    // var_dump($email_valid);
     
-    
+    // print("1<br>");
+
+
     if(!$email_valid) {
+        // print("2<br>");
         $errors['email'] = "Введите свой email корректно.";
     } 
-    // elseif($res_email) {
-        // $errors['email'] = "Такой email уже существует!";
-    // }
+    
+    elseif (mysqli_num_rows($res_email) > 0) {
+        
+        // print("3<br>");
+        $errors['email'] = "Такой email уже существует!";
+
+    }
 
 
     

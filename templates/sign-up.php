@@ -7,7 +7,7 @@
     <?php endforeach; ?>
       </ul>
 </nav>
-<?= var_dump($errors); ?>
+<!-- var_dump($errors);  -->
 <br>
 <?php $form_error = isset($errors) ? "form--invalid" : ""; ?>
 
@@ -25,7 +25,7 @@
     <?php if (isset($errors['email'])) {
             echo "<span class='form__error'>" . $errors['email'] . "</span>";
            }
-           var_dump($errors['email']); 
+          //  var_dump($errors['email']); 
            ?>
            
     <!-- <span class="form__error">Введите e-mail</span> -->

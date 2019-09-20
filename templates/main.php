@@ -27,8 +27,13 @@
                     <h3 class="lot__title"><a class="text-link" href="lot.php?id=<?= $item['id_lot']; ?>"><?= htmlspecialchars($item['name_l']); ?></a></h3>
                     <div class="lot__state">
                         <div class="lot__rate">
+                            <?php if (!$item['bet_step']) : ?>
                             <span class="lot__amount">Стартовая цена</span>
                             <span class="lot__cost"><?= formatPrice($item['price']); ?></span>
+                          <?php else : ?>
+                        <span class="lot__amount">Текущая цена</span>
+                            <span class="lot__cost"><?= formatPrice($item['bet_step']); ?></span>
+                            <?php endif; ?>
                         </div>
                         <?php   
                         $arr = get_dt_range($item['time_exit']); 

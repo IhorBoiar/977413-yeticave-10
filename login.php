@@ -3,9 +3,6 @@ require_once("helpers.php");
 require_once("functions.php");
 require_once("data.php");
 
-$_SESSION['email'] = $_POST['email'];
-$_SESSION['password'] = $_POST['password'];
-$_SESSION['name'] = $_POST['name'];
 
 $ses_email = $_SESSION['email'];
 $ses_password = $_SESSION['password'];
@@ -45,20 +42,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $select_email = "SELECT * FROM `users` WHERE `email` = '$email'";
     $result_email = mysqli_query($con, $select_email);
     
+
     if (mysqli_num_rows($result_email) == 0) {
         $errors['email'] = "Нет такого пользователя";
     } elseif($password) {
-        $password_1 = mysqli_fetch_assoc($result_email);
-        $password_2 = $password_1['password'];
+        $user = mysqli_fetch_assoc($result_email);
+        $password_2 = $user['password'];
         $passwordVerify = password_verify($password, $password_2);
         if (!$passwordVerify) {
             $errors['password'] = "Вы ввели неправильный пароль";
         }
     }
         if(empty($errors)) {
+                $_SESSION['email'] = $_POST['email'];
+                $_SESSION['password'] = $_POST['password'];
+                $_SESSION['name'] = $user['name'];
+                $_SESSION['id'] = $user['id'];
+                
+
                 header('Location: /');
-                $_SESSION['name'] = $password_1['name'];
-                $ses_name = $_SESSION['name'];
+
+                // $_SESSION['name'] = $password_1['name'];
+                // $ses_name = $_SESSION['name'];
                     } else {
                         $_SESSION = [];
                         $sign_up_page = include_template("login.php", [
@@ -97,10 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          'title' => 'Вход',
         ]);
 
-        print("<br> Email: " . $email);
-        print("<br> Password: " . $password_2);
-        print("<br> Errors: " . var_dump($errors));
-        print("<br> PasswordVef: " . $passwordVerify);
+        // print("<br> Email: " . $email);
+        // print("<br> Password: " . $password_2);
+        // print("<br> Errors: " . var_dump($errors));
+        // print("<br> PasswordVef: " . $passwordVerify);
             
     print($layout_page);
     
