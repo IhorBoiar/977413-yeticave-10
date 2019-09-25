@@ -133,6 +133,7 @@ if($lot)  {
     
             $step_lot = (int)$lot['round_of_bet'];
             $bet_step = $price_lot + $step_lot;
+            
 
             // echo "что вишло";
             // var_dump($bet_step);

@@ -1,0 +1,14 @@
+{
+    "name": "vendor/yeticave",
+    "description": "my project",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Ihor Boiar",
+            "email": "igorboiar11@gmail.com"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "^6.0"
+    }
+}

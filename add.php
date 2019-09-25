@@ -117,8 +117,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $id_user = $id['id'];
         
                 $sql_insert = "INSERT INTO `lots` (`name`, `description`, `price`, `img`, `category_id`,
-                `time_exit`, `user_id`, `winner_id`, `round_of_bet`)
-                VALUES ('$lot_name', '$message', '$lot_rate', '$img', '$category', '$lot_date', '$id_user', 2, '$lot_step')";
+                `time_exit`, `user_id`, `round_of_bet`)
+                VALUES ('$lot_name', '$message', '$lot_rate', '$img', '$category', '$lot_date', '$id_user', '$lot_step')";
                 $result_ins = mysqli_query($con, $sql_insert);
                 
                 $new_lot = mysqli_insert_id($con);

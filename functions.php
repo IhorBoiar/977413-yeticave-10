@@ -44,7 +44,7 @@ if(!$con) {
     
     function get_dt_range($format) 
     {
-        $time_now = strtotime("2019-10-10 14:31");
+        $time_now = strtotime(date("Y-m-d H:i:s"));
         $time_last = strtotime($format);    
         
         $diff_time = $time_last - $time_now;
