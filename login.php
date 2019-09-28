@@ -19,8 +19,12 @@ $sql_cat = "SELECT * FROM categories";
 $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
-$email = $_POST['email'];
-$password = $_POST['password'];
+
+$email = mysqli_real_escape_string($con, $_POST['email']);
+$password = mysqli_real_escape_string($con, $_POST['password']);
+
+// $email = $_POST['email'];
+// $password = $_POST['password'];
                
 
 

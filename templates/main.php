@@ -41,7 +41,7 @@
                         $min = $arr[1];
                         ?>
                         <div class="lot__timer timer <?php if ($hour < 1) { echo "timer--finishing"; } ?>">
-                        <?php echo $hour . ':' . $min; ?>
+                        <?php if ($hour <= 0 and $min <= 0) { echo "Торги окончены"; } else { echo $hour . ':' . $min;} ?>
                         </div>
                     </div>
                 </div>

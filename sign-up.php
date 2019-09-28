@@ -79,8 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
  
     $errors = array_filter($errors);
-   
-    $email = $_POST['email'];
+    $email = mysqli_real_escape_string($con, $_POST['email']);
+
+    // $email = $_POST['email'];
     $email_valid = filter_var($email, FILTER_VALIDATE_EMAIL);
     $sql_email = "SELECT * FROM users WHERE email = '$email'";
     $res_email = mysqli_query($con, $sql_email);
@@ -104,14 +105,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     
     if(empty($errors)) {
-                $name = $_POST['name'];
-                $email = $_POST['email'];
+        $name = mysqli_real_escape_string($con, $_POST['name']);
+        $password = mysqli_real_escape_string($con, $_POST['password']);
+
+        $contacts = mysqli_real_escape_string($con, $_POST['message']);
+                // $name = $_POST['name'];
                 
-                $password = $_POST['password'];
+                // $password = $_POST['password'];
                 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
 
-                $contacts = $_POST['message'];
+                // $contacts = $_POST['message'];
 
                 $sql_user_insert = "INSERT INTO `users` (`name`, `email`, `password`, `contacts`)
                 VALUES ('$name', '$email', '$passwordHash', '$contacts')";

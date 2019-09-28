@@ -15,7 +15,9 @@ $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
 
-$search = $_GET['search'] ?? '';
+
+$search = mysqli_real_escape_string($con, $_GET['search']) ?? '';
+
 if ($search) {
     $sql = "SELECT l.id AS id_lot, l.name AS name_lot, price, img, c.name AS name_cat, time_exit
      FROM lots l 

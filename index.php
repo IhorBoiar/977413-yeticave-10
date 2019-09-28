@@ -2,7 +2,7 @@
 require_once("helpers.php");
 require_once("functions.php");
 require_once("data.php");
-// require_once("getwinner.php");
+require_once("getwinner.php");
 
 $con = mysqli_connect("localhost", "root", "", "yeticave5");
 mysqli_set_charset($con, "utf8");

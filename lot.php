@@ -23,22 +23,24 @@ $sql_cat = "SELECT * FROM categories";
 $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
-$lot_id = $_GET['id'];
 
-$sql_bets = "SELECT *, u.name AS name_user FROM bets b
-            JOIN users u ON u.id = b.user_id WHERE lot_id = $lot_id";
+$sql_bets = "SELECT *, DATE_FORMAT(date, '%d.%m.%y в %H:%i') AS date_bet,  u.name AS name_user FROM bets b
+            JOIN users u ON u.id = b.user_id WHERE lot_id = $safe_id";
 $result_bets = mysqli_query($con, $sql_bets);
 $bets = mysqli_fetch_all($result_bets, MYSQLI_ASSOC);
 
-$lot_id = $_GET['id'];
             
-$sql_select_price_1 = "SELECT price FROM bets WHERE lot_id = $lot_id ORDER BY id DESC LIMIT 1";
+$sql_select_price_1 = "SELECT price FROM bets WHERE lot_id = $safe_id ORDER BY id DESC LIMIT 1";
             $res_select_price_1 = mysqli_query($con, $sql_select_price_1);        
             $last_bets_1 = mysqli_fetch_assoc($res_select_price_1);
             $price_lot = (int)$last_bets_1['price'];
     
             $step_lot = (int)$lot['round_of_bet'];
             $bet_step = $price_lot + $step_lot;
+
+            $start_price = (int)$lot['price'];
+            $bet_step_2 = $start_price + $step_lot;
+
 
 // ///////////////////////////////////////////////////////////////////
 // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -89,42 +91,48 @@ if($lot)  {
                 $errors[$key] = 'Это поле надо заполнить';
             }
         }
-
-        $step = $_POST['cost'];
+        $step = mysqli_real_escape_string($con, $_POST['cost']);
+        // $step = $_POST['cost'];
         $int_step = (int)$step;
-        
+        $price = mysqli_real_escape_string($con, $_POST['cost']);
+
         if ($int_step <= 0) {
                 $errors['cost'] = "Число должно быть больше нуля.";
             } elseif(!is_int($int_step)) {
                 $errors['cost'] = "Число должно быть целым.";
             }
+            if (strlen($int_step) > 7) {
+                $errors['cost'] = "Не более 7 цифр.";     
+            }
 
 
             
             
-            if ($int_step < $bet_step) {
+            if ($int_step < $bet_step or $int_step < $bet_step_2) {
                 $errors['cost'] = "Ставка должна быть више цены на $step_lot рублей";
             }
         
-        
+            if (!ctype_digit($price)) {
+                $errors['cost'] = "Используйте только цифри.";
+            }
         
             
-
         if (empty($errors)) {
-            $lot_id = $_GET['id'];
-            $price = $_POST['cost'];
+            
             $email = $_SESSION['email'];
             $sql_user = "SELECT id FROM users WHERE email= '$email'";
             $res_user = mysqli_query($con, $sql_user);
             $user = mysqli_fetch_assoc($res_user);
             $user_id = $user['id'];
-        
-
+        // ////
+            $sql_delete = "DELETE FROM bets WHERE user_id = $user_id AND lot_id = $safe_id ORDER BY date DESC LIMIT 1";
+            $res_delete_bet = mysqli_query($con, $sql_delete);
+            
             $sql_ins_bet = "INSERT INTO `bets`(`price`, `user_id`, `lot_id`) VALUES ('$price', '$user_id', '$safe_id')";
             $res_ins_bet = mysqli_query($con, $sql_ins_bet);
             
 //                 
-            $sql_new_price = "SELECT price FROM bets WHERE lot_id = $lot_id ORDER BY id DESC LIMIT 1";
+            $sql_new_price = "SELECT price FROM bets WHERE lot_id = $safe_id ORDER BY id DESC LIMIT 1";
             
             $res_new = mysqli_query($con, $sql_new_price);        
             $new_price_1 = mysqli_fetch_assoc($res_new);
@@ -138,14 +146,11 @@ if($lot)  {
             // echo "что вишло";
             // var_dump($bet_step);
             // ////////////////////
-            $lot_id = $_GET['id'];  
-
-            $sql_bets = "SELECT *, u.name AS name_user FROM bets b
-                        JOIN users u ON u.id = b.user_id WHERE lot_id = $lot_id";
+            
+            $sql_bets = "SELECT *, DATE_FORMAT(date, '%d.%m.%y в %H:%i') AS date_bet, u.name AS name_user FROM bets b
+                        JOIN users u ON u.id = b.user_id WHERE lot_id = $safe_id";
             $result_bets = mysqli_query($con, $sql_bets);
             $bets = mysqli_fetch_all($result_bets, MYSQLI_ASSOC);
-            
-            
         }
     }
 

@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+require_once("getwinner.php");
+
 // $_SESSION['email'];
 // $_SESSION['password'];
 // $_SESSION['name']; 
@@ -54,8 +56,14 @@ if(!$con) {
         $hours = str_pad($a, 2, "0", STR_PAD_LEFT);
         $mins = str_pad($b, 2, "0", STR_PAD_LEFT);
 
-        $array = [$hours, $mins];
-        return $array;
+        
+        // if($hours <= 0 and $min <= 0) {
+        //     $array = [00, 00];
+        //     return $array;
+        // } else {
+            $array = [$hours, $mins];
+            return $array;
+        // }
     }
 
     function getPostVal($name) {

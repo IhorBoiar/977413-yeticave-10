@@ -34,7 +34,7 @@ $min = $time_exit[1];
 // echo '<pre>';
 //   print_r( $time_exit );
 // echo '</pre>';
-if ($hour <= 0 AND $min <= 0) {
+if ($hour <= 0 AND $min <= 1) {
     // $winner = $time['id_user']
     // 
     $lot_id = $time['lot_id'];
@@ -61,27 +61,27 @@ if ($hour <= 0 AND $min <= 0) {
         $sql_add_winner = "UPDATE lots SET winner_id = $winner WHERE id = $lot_id";
         $res_add_winner = mysqli_query($con, $sql_add_winner);
         
-        $transport = new Swift_SmtpTransport("phpdemo.ru", 25);
-        $transport->setUsername("keks@phpdemo.ru");
-        $transport->setPassword("htmlacademy");
+        // $transport = new Swift_SmtpTransport("phpdemo.ru", 25);
+        // $transport->setUsername("keks@phpdemo.ru");
+        // $transport->setPassword("htmlacademy");
 
-        $mailer = new Swift_Mailer($transport);
+        // $mailer = new Swift_Mailer($transport);
 
         
 
-        $message = new Swift_Message();
-        $message->setSubject("Поздравляем с победой!");
-        $message->setFrom(['keks@phpdemo.ru' => 'YetiCave']);
-        $message->setBcc($recipients);
+        // $message = new Swift_Message();
+        // $message->setSubject("Поздравляем с победой!");
+        // $message->setFrom(['keks@phpdemo.ru' => 'YetiCave']);
+        // $message->setBcc($recipients);
 
-        $recipients[$winner_name] = $winner_login;
+        // $recipients[$winner_name] = $winner_login;
 
-        $msg_content = include_template('email.php', [
-            'winner_name' => $winner_name,
-            'name_lot' => $name_lot,
-            'lot_id' => $lot_id,
-            ]);
-        $message->setBody($msg_content, 'text/html');
+        // $msg_content = include_template('email.php', [
+        //     'winner_name' => $winner_name,
+        //     'name_lot' => $name_lot,
+        //     'lot_id' => $lot_id,
+        //     ]);
+        // $message->setBody($msg_content, 'text/html');
     }
 }
 }

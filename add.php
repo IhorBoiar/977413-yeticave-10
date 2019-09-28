@@ -97,19 +97,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //     $errors['img'] = 'Вы не загрузили файл.';
         // 
     }
+
+    $lot_rate = mysqli_real_escape_string($con, $_POST['lot-rate']);
+
+    $lot_step = mysqli_real_escape_string($con, $_POST['lot-step']);
+
+
+    if (!ctype_digit($lot_step)) {
+        $errors['lot-step'] = "Используйте только цифри.";
+    }
+
+    if (!ctype_digit($lot_rate)) {
+        $errors['lot-rate'] = "Используйте только цифри.";
+    }
+
+
         if (count($errors)) {
             $add_page = include_template('add.php', ['errors' => $errors, 'categories' => $categories]);
         }
 
         else {
-                
-                $lot_name = $_POST['lot-name'];
-                $category = $_POST['category'];
-                $message = $_POST['message'];
+            
+            $lot_name = mysqli_real_escape_string($con, $_POST['lot-name']);
+
+            $category = mysqli_real_escape_string($con, $_POST['category']);
+
+            $message = mysqli_real_escape_string($con, $_POST['message']);
+
+            
+            $lot_date = mysqli_real_escape_string($con, $_POST['lot-date']);
+            
+                // $lot_name = $_POST['lot-name'];
+                // $category = $_POST['category'];
+                // $message = $_POST['message'];
                 $img = 'uploads/' . $_FILES['img']['name'];
-                $lot_rate = $_POST['lot-rate'];
-                $lot_step = $_POST['lot-step'];
-                $lot_date = $_POST['lot-date'];
+                // $lot_rate = $_POST['lot-rate'];
+                // $lot_step = $_POST['lot-step'];
+                // $lot_date = $_POST['lot-date'];
                 
                 $email = $_SESSION['email'];
                 $sql_user = mysqli_query($con, "SELECT * FROM `users` WHERE `email` = '$email'");
