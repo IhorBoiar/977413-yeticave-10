@@ -1,7 +1,6 @@
 <?php
 require_once("helpers.php");
 require_once("functions.php");
-require_once("data.php");
 
 $con = mysqli_connect("localhost", "root", "", "yeticave5");
 mysqli_set_charset($con, "utf8");
@@ -14,8 +13,6 @@ $sql_cat = "SELECT * FROM categories";
 $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
-
-
 $search = mysqli_real_escape_string($con, $_GET['search']) ?? '';
 
 if ($search) {
@@ -24,8 +21,6 @@ if ($search) {
     JOIN categories c ON c.id = l.category_id WHERE MATCH(l.name, description) AGAINST('$search')";
     $result = mysqli_query($con, $sql);
     $lots = mysqli_fetch_all($result, MYSQLI_ASSOC);  
-    print(var_dump($result));
-    // не работает
     if (mysqli_num_rows($result) == 0) { 
         $search_page = include_template("error.php", [
             'error_message' => "Ничего не найдено по вашему запросу...",

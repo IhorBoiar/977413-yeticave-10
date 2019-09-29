@@ -3,20 +3,6 @@ session_start();
 
 require_once("getwinner.php");
 
-// $_SESSION['email'];
-// $_SESSION['password'];
-// $_SESSION['name']; 
-
-// echo '<pre>';
-//   print_r( $_SESSION );
-// echo '</pre>';
-// print("ses email:" . $_SESSION['email']);
-// print("<br>ses passw:" . $_SESSION['password']);
-// print("<br>ses name:" . $_SESSION['name']);
-// print("<br>");
-
-// print("<br>sesion:" . var_dump($_SESSION));
-
 $con = mysqli_connect("localhost", "root", "", "yeticave5");
 mysqli_set_charset($con, "utf8");
 
@@ -56,14 +42,8 @@ if(!$con) {
         $hours = str_pad($a, 2, "0", STR_PAD_LEFT);
         $mins = str_pad($b, 2, "0", STR_PAD_LEFT);
 
-        
-        // if($hours <= 0 and $min <= 0) {
-        //     $array = [00, 00];
-        //     return $array;
-        // } else {
-            $array = [$hours, $mins];
-            return $array;
-        // }
+        $array = [$hours, $mins];
+        return $array;
     }
 
     function getPostVal($name) {
@@ -102,15 +82,13 @@ if(!$con) {
         return NULL;
    
     }
-
+    
     function validateStep($name) {
         $lot_step = $_POST[$name];
         $int = (int)$lot_step;
         if ($int <= 0) {
             return "Число должно быть больше нуля.";
-        } elseif(!is_int($int)) {
-            return "Число должно быть целым.";
-        }
+        } 
    
         return NULL;
    
