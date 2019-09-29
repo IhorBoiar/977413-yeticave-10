@@ -1,7 +1,7 @@
 <?php
 require_once("functions.php");
 require_once("helpers.php");
-require_once("data.php");
+
 
 $con = mysqli_connect("localhost", "root", "", "yeticave5");
 mysqli_set_charset($con, "utf8");
@@ -9,7 +9,6 @@ mysqli_set_charset($con, "utf8");
 if(!$con) {
     echo "ERROR";
 }
-// подключение к базе данных
 
 $sql_cat = "SELECT * FROM categories";
 $result_cat = mysqli_query($con, $sql_cat);
@@ -36,7 +35,6 @@ if (!$_SESSION['email']) {
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$lot = $_POST;
 
 	$required = ['lot-name', 'message', 'lot-date'];
     $errors = [];
@@ -63,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    
     $errors = array_filter($errors);
         
         foreach ($required as $key) {
@@ -88,53 +85,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                      $errors['img'] = "Вы не загрузили картинку или выбрали неправильний формат(формат должен быть - JPG, JPEG, PNG)";
                  } elseif ($size > 5000000) {
                     $errors['img'] = "Максимальный размер - 5М";
-                }
-        //          else {
-        //             $lot['img'] = $file_name;
-        //         }
+                } 
+        }
 
-        // } else {
-        //     $errors['img'] = 'Вы не загрузили файл.';
-        // 
+    $lot_rate = mysqli_real_escape_string($con, $_POST['lot-rate']);
+
+    $lot_step = mysqli_real_escape_string($con, $_POST['lot-step']);
+
+
+    if (!ctype_digit($lot_step)) {
+        $errors['lot-step'] = "Используйте только цифри и целые числа.";
     }
-        if (count($errors)) {
+
+    if (!ctype_digit($lot_rate)) {
+        $errors['lot-rate'] = "Используйте только цифри и целые числа.";
+    }
+
+
+    if (count($errors)) {
             $add_page = include_template('add.php', ['errors' => $errors, 'categories' => $categories]);
-        }
-
-        else {
-                
-                $lot_name = $_POST['lot-name'];
-                $category = $_POST['category'];
-                $message = $_POST['message'];
-                $img = 'uploads/' . $_FILES['img']['name'];
-                $lot_rate = $_POST['lot-rate'];
-                $lot_step = $_POST['lot-step'];
-                $lot_date = $_POST['lot-date'];
-                
-                $email = $_SESSION['email'];
-                $sql_user = mysqli_query($con, "SELECT * FROM `users` WHERE `email` = '$email'");
-                $id = mysqli_fetch_assoc($sql_user);
-                $id_user = $id['id'];
+    } else {
         
-                $sql_insert = "INSERT INTO `lots` (`name`, `description`, `price`, `img`, `category_id`,
-                `time_exit`, `user_id`, `winner_id`, `round_of_bet`)
-                VALUES ('$lot_name', '$message', '$lot_rate', '$img', '$category', '$lot_date', '$id_user', 2, '$lot_step')";
-                $result_ins = mysqli_query($con, $sql_insert);
-                
-                $new_lot = mysqli_insert_id($con);
-   
-                if ($new_lot) {
-                header('Location: lot.php?id=' . $new_lot);
-            }
+        $lot_name = mysqli_real_escape_string($con, $_POST['lot-name']);
+        $category = mysqli_real_escape_string($con, $_POST['category']);
+        $message = mysqli_real_escape_string($con, $_POST['message']);
+        $lot_date = mysqli_real_escape_string($con, $_POST['lot-date']);
+        $img = 'uploads/' . $_FILES['img']['name'];
+        
+        $email = $_SESSION['email'];
+        $sql_user = mysqli_query($con, "SELECT * FROM `users` WHERE `email` = '$email'");
+        $id = mysqli_fetch_assoc($sql_user);
+        $id_user = $id['id'];
+    
+        $sql_insert = "INSERT INTO `lots` (`name`, `description`, `price`, `img`, `category_id`,
+        `time_exit`, `user_id`, `round_of_bet`)
+        VALUES ('$lot_name', '$message', '$lot_rate', '$img', '$category', '$lot_date', '$id_user', '$lot_step')";
+        $result_ins = mysqli_query($con, $sql_insert);    
+        $new_lot = mysqli_insert_id($con);
+
+        if ($new_lot) {
+        header('Location: lot.php?id=' . $new_lot);
         }
-
     }
-
-    else {
+} else {
         $add_page = include_template("add.php", [
             'categories' => $categories,
          ]);
-    }
+}
 
  $layout_page = include_template("layout.php",[
     'content' => $add_page,

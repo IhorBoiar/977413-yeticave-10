@@ -11,9 +11,7 @@
       <section class="lots">
         <h2>Результаты поиска по запросу «<span><?= $search; ?></span>»</h2>
         <ul class="lots__list">
-
             <?php foreach($lots as $lot) : ?>
-          
             <li class="lots__item lot">
             <div class="lot__image">
               <img src="<?= $lot['img']; ?>" width="350" height="260" alt="<?= htmlspecialchars($lot['name_lot']); ?>">
@@ -25,24 +23,19 @@
                 <div class="lot__rate">
                   <span class="lot__amount">Стартовая цена/ 12 bets</span>
                   <span class="lot__cost"><?= formatPrice($lot['price']); ?></span>
-                        
                 </div>
-                
-                
                 <?php   
-                        $arr = get_dt_range($item['time_exit']); 
-                        $hour = $arr[0];
-                        $min = $arr[1];
-                        ?>
-                        <div class="lot__timer timer <?php if ($hour < 1) { echo "timer--finishing"; } ?>">
-                        <?php echo $hour . ':' . $min; ?>
-                        </div>
+                    $arr = get_dt_range($item['time_exit']); 
+                    $hour = $arr[0];
+                    $min = $arr[1];
+                  ?>
+                  <div class="lot__timer timer <?php if ($hour < 1) { echo "timer--finishing"; } ?>">
+                  <?php echo $hour . ':' . $min; ?>
+                  </div>
               </div>
             </div>
           </li>
-
         <?php endforeach; ?>
-
         </ul>
       </section>
       <ul class="pagination-list">

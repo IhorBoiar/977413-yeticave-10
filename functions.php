@@ -1,19 +1,7 @@
 <?php
 session_start();
 
-// $_SESSION['email'];
-// $_SESSION['password'];
-// $_SESSION['name']; 
-
-// echo '<pre>';
-//   print_r( $_SESSION );
-// echo '</pre>';
-// print("ses email:" . $_SESSION['email']);
-// print("<br>ses passw:" . $_SESSION['password']);
-// print("<br>ses name:" . $_SESSION['name']);
-// print("<br>");
-
-// print("<br>sesion:" . var_dump($_SESSION));
+require_once("getwinner.php");
 
 $con = mysqli_connect("localhost", "root", "", "yeticave5");
 mysqli_set_charset($con, "utf8");
@@ -44,7 +32,7 @@ if(!$con) {
     
     function get_dt_range($format) 
     {
-        $time_now = strtotime("2019-10-10 14:31");
+        $time_now = strtotime(date("Y-m-d H:i:s"));
         $time_last = strtotime($format);    
         
         $diff_time = $time_last - $time_now;
@@ -94,15 +82,13 @@ if(!$con) {
         return NULL;
    
     }
-
+    
     function validateStep($name) {
         $lot_step = $_POST[$name];
         $int = (int)$lot_step;
         if ($int <= 0) {
             return "Число должно быть больше нуля.";
-        } elseif(!is_int($int)) {
-            return "Число должно быть целым.";
-        }
+        } 
    
         return NULL;
    

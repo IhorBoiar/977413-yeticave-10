@@ -8,7 +8,6 @@
       </ul>
     </nav>
     <section class="lot-item container">
-
       <h2><?= $lot['name_lot']; ?></h2>
       <div class="lot-item__content">
         <div class="lot-item__left">
@@ -26,28 +25,20 @@
             $min = $arr[1];
             ?>
             <div class="lot-item__timer timer <?php if ($hour < 1) { echo "timer--finishing"; } ?>">
-            <?php echo $hour . ':' . $min; ?>
+            <?php if ($hour <= 0 and $min <= 0) { echo "Торги окончены"; } else { echo $hour . ':' . $min;} ?>
             </div> 
             <div class="lot-item__cost-state">
               <div class="lot-item__rate">
-              
-              
-               
-              <?php if (!$price_lot) : ?>
-                  
-                   <span class="lot-item__amount">Стартовая цена</span>
+              <?php if (!$price_lot) : ?>    
+                  <span class="lot-item__amount">Стартовая цена</span>
                   <span class="lot-item__cost"><?= formatPrice($lot['price']); ?></span>
-              
                <?php else : ?> 
-                  
-                   <span class="lot-item__amount">Текущая цена</span>
+                  <span class="lot-item__amount">Текущая цена</span>
                   <span class="lot-item__cost"><?= formatPrice($price_lot); ?></span>    
                <?php endif; ?>
                 </div>
               <div class="lot-item__min-cost">
-<?php 
-// echo var_dump($price_lot);
-?>
+              <?php if ($hour >= 0 and $min >= 1) : ?>
               <?php if ($price_lot) :?>
                 Мин. ставка <span><?=formatPrice_2($bet_step);?> р</span>
                 <?php else :?>
@@ -57,48 +48,40 @@
                 $min_bet = $lot_bet + $price; 
                 ?>
                 Мин. ставка <span><?=formatPrice_2($min_bet);?> р</span>
-            <?php endif; ?>
+                <?php endif; ?>
               </div>
             </div>
-        </div>    
-        
+        </div>      
         <?php if($_SESSION['email']):?>
             <form class="lot-item__form" action="" method="post" autocomplete="off">
-
             <?php $form_error = isset($errors['cost']) ? "form__item--invalid" : ""; ?>
-
-
               <p class="lot-item__form-item form__item <?= $form_error; ?>">
                 <label for="cost">Ваша ставка</label>
-                <input id="cost" type="text" name="cost" placeholder="<?=$min_bet;?>" value="<?=getPostVal('cost');?>">
-               
+                <input id="cost" type="text" name="cost" placeholder="<?=$min_bet ?? $bet_step;?>" value="<?=getPostVal('cost');?>">               
                 <?php if (isset($errors['cost'])) {
-            echo "<span class='form__error'>" . $errors['cost'] . "</span>";
-           }
-           
-           ?>
-
+                        echo "<span class='form__error'>" . $errors['cost'] . "</span>";
+                       }        
+                ?>
          </p>
               <button type="submit" class="button">Сделать ставку</button>
             </form>
           </div>
-          <!-- ///////// -->
+          <?php endif; ?>
+          <?php endif; ?>
           <?php if($bets) : ?>
           <div class="history">
-            <h3>История ставок (<span>10</span>)</h3>
+            <h3>История ставок (<span><?= $count_bets = count($bets); ?></span>)</h3>
             <table class="history__list">
             <?php foreach($bets as $bet) : ?>
               <tr class="history__item">
                 <td class="history__name"><?= $bet['name_user']; ?></td>
                 <td class="history__price"><?= $bet['price']; ?></td>
-                <td class="history__time"><?= $bet['date']; ?></td>
+                <td class="history__time"><?= $bet['date_bet']; ?></td>
               </tr>
           <?php endforeach; ?>
             </table>
           </div>
-          <?php endif; ?>
           <?php endif; ?> 
         </div>
       </div>
     </section>
-  
