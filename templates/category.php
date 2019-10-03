@@ -10,7 +10,7 @@
       </nav>
       <div class="container">
         <section class="lots">
-          <h2>Результаты поиска по запросу «<span><?= $search; ?></span>»</h2>
+          <h2>Все лоты в категории — <?= $category_name; ?></h2>
           <ul class="lots__list">
               <?php foreach($lots as $lot) : ?>
               <?php   
@@ -18,9 +18,9 @@
                       $hour = $arr[0];
                       $min = $arr[1];
                     ?>
-                    
+               <?php if ($hour >= 0 and $min > 0) : ?>      
               <li class="lots__item lot">
-              <?php if ($hour >= 0 and $min > 0) : ?>
+              
               <div class="lot__image">
                 <img src="<?= $lot['img']; ?>" width="350" height="260" alt="<?= htmlspecialchars($lot['name_lot']); ?>">
               </div>
@@ -37,7 +37,12 @@
                             <span class="lot__cost"><?= formatPrice($lot['bet_step']); ?></span>
                             <?php endif; ?>  
                   </div>
-                  
+                  <?php   
+                      $arr = get_dt_range($lot['time_exit']); 
+                      $hour = $arr[0];
+                      $min = $arr[1];
+                    ?>
+                    
                     <div class="lot__timer timer <?php if ($hour < 1) { echo "timer--finishing"; } ?>">
                         <?php if ($hour <= 0 and $min <= 0) { echo "Торги окончены"; } else { echo $hour . ':' . $min;} ?>
                         </div>
@@ -67,8 +72,8 @@
               <li class="pagination-item pagination-item-next"><a href="./category.php?category=<?= $category?>&page=<?=$next;?>">Вперед</a></li>
             <?php else : ?>
               <li class="pagination-item pagination-item-next"></li>
-            <?php endif;?>
-          </ul>    
+            <?php endif;?>    
+           </ul>
           <?php endif; ?>
       </div>
 </main>

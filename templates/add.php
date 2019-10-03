@@ -1,8 +1,9 @@
+ <main>  
    <nav class="nav">
       <ul class="nav__list container">
     <?php foreach($categories as $cat) : ?>
         <li class="nav__item">
-          <a href="<?= $cat['sim_code']; ?>"><?= $cat['name']; ?></a>
+          <a href="./category.php?category=<?= $cat['sim_code']; ?>"><?= $cat['name']; ?></a>
         </li>
     <?php endforeach; ?>
       </ul>
@@ -44,11 +45,14 @@
         <label>Изображение <sup>*</sup></label>
         <div class="form__input-file">
           <input class="visually-hidden" type="file" id="lot-img" name="img">
+          <?php if (isset($errors['img'])) {
+              echo "<span>" . $errors['img'] . "</span>";
+           } 
+      ?> 
           <label for="lot-img">
             Добавить
           </label>         
-        </div>
-        <span><?=$errors['img']?></span>
+        </div> 
       </div>
       <div class="form__container-three">
       <?php $error_rate = isset($errors['lot-rate']) ? "form__item--invalid" : "1"; ?>
@@ -88,3 +92,4 @@
        ?>
       <button type="submit" class="button">Добавить лот</button>
     </form>
+</main>
