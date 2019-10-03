@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$con = mysqli_connect("localhost", "root", "", "new");
+$con = mysqli_connect("localhost", "root", "", "yeticave");
 mysqli_set_charset($con, "utf8");
 
 if(!$con) {
