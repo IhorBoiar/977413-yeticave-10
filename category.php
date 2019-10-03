@@ -83,5 +83,5 @@ $layout_page = include_template("layout.php", [
      'categories' => $categories,
      'title' => 'Поиск по категориям',
     ]);
-var_dump($cur_page);
+
 print($layout_page);

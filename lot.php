@@ -82,7 +82,7 @@ if(!empty($lot))  {
         $step = mysqli_real_escape_string($con, $_POST['cost']);
         $int_step = (int)$step;
         $price = mysqli_real_escape_string($con, $_POST['cost']);
-        // var_dump($price);
+
 
         if ($int_step <= 0) {
                 $errors['cost'] = "Число должно быть больше нуля.";
@@ -154,7 +154,7 @@ if(!empty($lot))  {
             $res_beter = mysqli_query($con, $sql_beter);
             $beter = mysqli_fetch_assoc($res_beter);
             $beter = $beter['user_id'];
-            var_dump($beter);
+            
 
 
             if ($id_user == $beter) {
