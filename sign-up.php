@@ -2,31 +2,25 @@
 require_once("helpers.php");
 require_once("functions.php");
 
-$con = mysqli_connect("localhost", "root", "", "yeticave5");
-mysqli_set_charset($con, "utf8");
-
-if(!$con) {
-    echo "ERROR";
-}
-
 $sql_cat = "SELECT * FROM categories";
 $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
-if ($_SESSION['email']) {
+if (isset($_SESSION['email'])) {
     http_response_code(403);
     
     $error = include_template("error.php", [
-        'error_message' => 'ты уже зарегестирован',
+        'error_message' => 'Вы уже пройшли регистрацию...',
+        'categories' => $categories,
     ]);
     
     $error_page = include_template("layout.php", [
         'content' => $error,
-        'user_name' => $user_name,
-        'is_auth' => $is_auth,
         'categories' => $categories,
-        'title' => 'ты уже зарегестирован',
+        'title' => 'Вы уже зарегестрированные',
         ]);
+    
+    print($error_page);
 } else {
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -41,7 +35,10 @@ if ($_SESSION['email']) {
                 return validateLenght('password', 6, 20);
             },
             'message' => function() {
-                return validateLenght('message', 10,300);
+                return validateLenght('message', 10, 300);
+            },
+            'name' => function() {
+                return validateLenght('name', 1, 20);
             },
             'email' => function() use ($con) {
                 return validateEmail('email', $con);
@@ -69,7 +66,7 @@ if ($_SESSION['email']) {
         $res_email = mysqli_query($con, $sql_email);
 
 
-        if(!$email_valid) {
+        if(!isset($email_valid)) {
             $errors['email'] = "Введите свой email корректно.";
         } elseif (mysqli_num_rows($res_email) > 0) {
             $errors['email'] = "Такой email уже существует!";
@@ -85,7 +82,7 @@ if ($_SESSION['email']) {
             VALUES ('$name', '$email', '$passwordHash', '$contacts')";
             $res_us_ins = mysqli_query($con, $sql_user_insert);           
 
-            if ($res_us_ins) {
+            if (isset($res_us_ins)) {
             header('Location: login.php');
             } 
         } else {
@@ -103,8 +100,6 @@ if ($_SESSION['email']) {
 
 $layout_page = include_template("layout.php", [
     'content' => $sign_up_page,
-     'user_name' => $user_name,
-     'is_auth' => $is_auth,
      'categories' => $categories,
      'title' => 'Регистрация',
     ]);

@@ -1,9 +1,9 @@
 INSERT INTO categories (name, sim_code) VALUES
     ('Доски и лыжи', 'boards'),
-    ('Крепления', 'fastening'),
+    ('Крепления', 'attachment'),
     ('Ботинки', 'boots'),
-    ('Одежда', 'clothes'),
-    ('Инструменты', 'instruments'),
+    ('Одежда', 'clothing'),
+    ('Инструменты', 'tools'),
     ('Разное', 'other');
 // Существующий список категорий;
 

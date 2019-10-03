@@ -1,15 +1,6 @@
 <?php
-require_once("helpers.php");
 require_once("functions.php");
 require_once("vendor/autoload.php");
-
-
-$con = mysqli_connect("localhost", "root", "", "yeticave5");
-mysqli_set_charset($con, "utf8");
-
-if(!$con) {
-    echo "ERROR";
-}
 
 $sql_time = "SELECT l.id AS lot_id, l.name AS name_lot, time_exit FROM lots l";
 $result_time = mysqli_query($con, $sql_time);
@@ -35,7 +26,7 @@ $min = $time_exit[1];
         $recipients = [];
 
         $name_lot = $time['name_lot'];
-        if ($res_win) {
+        if (isset($res_win)) {
             $sql_add_winner = "UPDATE lots SET winner_id = $winner WHERE id = $lot_id";
             $res_add_winner = mysqli_query($con, $sql_add_winner);
             

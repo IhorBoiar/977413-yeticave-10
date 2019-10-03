@@ -1,8 +1,9 @@
+<main>
     <nav class="nav">
     <ul class="nav__list container">
     <?php foreach($categories as $cat) : ?>
         <li class="nav__item">
-          <a href="<?= $cat['sim_code']; ?>"><?= $cat['name']; ?></a>
+          <a href="./category.php?category=<?= $cat['sim_code']; ?>"><?= $cat['name']; ?></a>
         </li>
     <?php endforeach; ?>
       </ul>
@@ -30,3 +31,4 @@
       </div>
       <button type="submit" class="button">Войти</button>
     </form>
+  </main>
