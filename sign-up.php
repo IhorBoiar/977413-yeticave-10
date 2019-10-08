@@ -6,6 +6,8 @@ $sql_cat = "SELECT * FROM categories";
 $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
+$sign_up_page = isset($sign_up_page);
+
 if (isset($_SESSION['email'])) {
     http_response_code(403);
     

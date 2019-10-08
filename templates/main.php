@@ -21,8 +21,8 @@
                         $hour = $arr[0];
                         $min = $arr[1];
                         ?>
-            <li class="lots__item lot">
            <?php if ($hour >= 0 and $min > 0) : ?>
+            <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="" width="350" height="260" alt="">
                     <img src="<?= $item['img']; ?>" width="350" height="260" alt="<?= htmlspecialchars($item['name_l']); ?>">

@@ -6,7 +6,11 @@ $sql_cat = "SELECT * FROM categories";
 $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
-if (!isset($_SESSION['email'])) {
+$ses = isset($_SESSION['email']);
+
+$add_page = isset($add_page);
+
+if (empty($ses)) {
     
     http_response_code(403);
     
@@ -112,7 +116,7 @@ if (!isset($_SESSION['email'])) {
             $lot_date = mysqli_real_escape_string($con, $_POST['lot-date']);
             $img = 'uploads/' . $_FILES['img']['name'];
             
-            $email = $_SESSION['email'];
+            $email = $_SESSION['email'] ?? "";
             $sql_user = mysqli_query($con, "SELECT * FROM `users` WHERE `email` = '$email'");
             $id = mysqli_fetch_assoc($sql_user);
             $id_user = $id['id'];

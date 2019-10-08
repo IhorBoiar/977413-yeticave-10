@@ -7,6 +7,8 @@ $sql_cat = "SELECT * FROM categories";
 $result_cat = mysqli_query($con, $sql_cat);
 $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 
+$sign_in_page = isset($sign_in_page);
+
 if (isset($_SESSION['email'])) {
     http_response_code(403);
     
@@ -50,7 +52,7 @@ if (isset($_SESSION['email'])) {
             $user = mysqli_fetch_assoc($result_email);
             $password_2 = $user['password'];
             $passwordVerify = password_verify($password, $password_2);
-            if (!isset($passwordVerify)) {
+            if (!$passwordVerify) {
                 $errors['password'] = "Вы ввели неправильный пароль";
             }
         }
@@ -66,26 +68,25 @@ if (isset($_SESSION['email'])) {
             $ses_password = $_SESSION['password'];
             $ses_name = $_SESSION['name'];
 
-
             header('Location: /');
 
         } else {
-            $sign_up_page = include_template("login.php", [
+            $sign_in_page = include_template("login.php", [
                 'categories' => $categories,
                 'errors' => $errors,
             ]);
         }
                     
     } else {
-        $sign_up_page = include_template("login.php", [
+        $sign_in_page = include_template("login.php", [
             'categories' => $categories,
         ]);        
     }
 
     $layout_page = include_template("layout.php", [
-        'content' => $sign_up_page,
-            'categories' => $categories,
-            'title' => 'Вход',
+        'content' => $sign_in_page,
+        'categories' => $categories,
+        'title' => 'Вход',
         ]);
 
     print($layout_page);

@@ -85,7 +85,7 @@
             </a>
         </div>
         <?php if (isset($_SESSION['email'])): ?>
-        <a class="main-footer__add-lot button" href="add-lot.html">Добавить лот</a>
+        <a class="main-footer__add-lot button" href="./add.php">Добавить лот</a>
         <?php endif; ?>
         
         <div class="main-footer__developed-by">
