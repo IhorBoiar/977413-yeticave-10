@@ -59,6 +59,7 @@
                         echo "<span class='form__error'>" . $errors['cost'] . "</span>";
                        }        
                 ?>
+                
          </p>
               <button type="submit" class="button">Сделать ставку</button>
             </form>
@@ -66,7 +67,9 @@
           <?php endif; ?>
           <?php endif; ?>
           <?php endif; ?>
-          </div>
+          <?php
+var_dump($true);
+                ?></div>
           <?php if(isset($bets)) : ?>
           <div class="history">
             <h3>История ставок (<span><?= $count_bets = count($bets); ?></span>)</h3>

@@ -37,7 +37,7 @@ if (!empty($last_bet)) {
     $new_price = (int)$lot['price'];
 }
 
-$id_user = isset($_SESSION['id']);
+$id_user = $_SESSION['id'] ?? "";
 $sql_creater = "SELECT u.id AS id_user, l.id AS id_lot, l.user_id AS lot_user_id FROM lots l
                 JOIN users u ON u.id = l.user_id 
                 WHERE l.id = $id";
