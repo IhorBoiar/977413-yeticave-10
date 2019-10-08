@@ -9,15 +9,15 @@ $categories = mysqli_fetch_all($result_cat, MYSQLI_ASSOC);
 $category = mysqli_real_escape_string($con, $_GET['category']) ?? '';
 if (isset($category)) {
 
-
     $cur_page = $_GET['page'] ?? 1;
     $page_items = 9;
     
-    $res_pages = mysqli_query($con, "SELECT COUNT(*) as cnt FROM lots WHERE winner_id IS NULL");
+    $res_pages = mysqli_query($con, "SELECT COUNT(*) as cnt FROM lots l
+                                    JOIN categories c ON l.category_id = c.id
+                                    WHERE winner_id IS NULL AND sim_code = '$category'");
     $res = mysqli_fetch_row($res_pages);
     $items_count = $res[0];
-
-   $pages_count = ceil($items_count / $page_items);
+    $pages_count = ceil($items_count / $page_items);
     $offset = ($cur_page - 1) * $page_items;
     
     $pages = range(1, $pages_count);

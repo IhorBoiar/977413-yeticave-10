@@ -36,11 +36,8 @@ if (!empty($last_bet)) {
 } else {
     $new_price = (int)$lot['price'];
 }
-// $bet_step = $price_lot + $step_lot;
 
-// $bet_step_2 = $start_price + $step_lot;
-
-$id_user = $_SESSION['id'];
+$id_user = isset($_SESSION['id']);
 $sql_creater = "SELECT u.id AS id_user, l.id AS id_lot, l.user_id AS lot_user_id FROM lots l
                 JOIN users u ON u.id = l.user_id 
                 WHERE l.id = $id";
@@ -116,11 +113,7 @@ if(!empty($lot))  {
             
             $sql_ins_bet = "INSERT INTO `bets`(`price`, `user_id`, `lot_id`) VALUES ('$price', '$user_id', '$id')";
             $res_ins_bet = mysqli_query($con, $sql_ins_bet);
-                   
-            // $sql_new_price = "SELECT price FROM bets WHERE lot_id = $id ORDER BY id DESC LIMIT 1";
-            // $res_new = mysqli_query($con, $sql_new_price);        
-            // $new_price_1 = mysqli_fetch_assoc($res_new);
-            
+             
             $sql_select_price_1 = "SELECT price FROM bets WHERE lot_id = $id ORDER BY id DESC LIMIT 1";
             $res_select_price_1 = mysqli_query($con, $sql_select_price_1);        
             $last_bets_1 = mysqli_fetch_assoc($res_select_price_1);
@@ -162,15 +155,6 @@ if(!empty($lot))  {
             } else {
                 $done = FALSE;
             }
-
-
-            // $sql_beter = "SELECT u.id, email, b.user_id, b.lot_id FROM users u
-            //               JOIN bets b ON u.id = b.user_id  
-            //                 WHERE email= '$email'";
-            // $res_beter = mysqli_query($con, $sql_beter);
-            // $beter = mysqli_fetch_assoc($res_beter);
-            // $beter_email = $beter['email'];
-
         }
 
     }
