@@ -67,9 +67,7 @@
           <?php endif; ?>
           <?php endif; ?>
           <?php endif; ?>
-          <?php
-var_dump($true);
-                ?></div>
+          </div>
           <?php if(isset($bets)) : ?>
           <div class="history">
             <h3>История ставок (<span><?= $count_bets = count($bets); ?></span>)</h3>
